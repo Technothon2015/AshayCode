@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+          <hibernate-mapping>  
+          
+          <class name="com.psl.bean.User" table="User">  
+          <id name="username">  
+          <column name="username"></column>
+          </id>  
+          <property name="password"></property>  
+          <property name="firstName"></property>  
+          <property name="lastName"></property>  
+          <property name="homeAddress"></property>
+          <property name="officeAddress"></property>
+          <property name="profilePicture"></property>  
+		  <property name="email"></property>
+		  <property name="mobileNo"></property>  
+         
+          </class>  
+          
+          <class name="com.psl.bean.Expense" table="Expense">  
+          <id name="expenseId">
+          <generator class="increment"></generator>  
+          </id>  
+          <property name="username"></property>  
+          <property name="expenseAmount"></property>  
+          <property name="expenseType"></property>  
+          <property name="expenseDescription"></property>
+          <property name="expenseDate"></property>
+          
+          </class> 
+          
+          <class name="com.psl.bean.Reminder" table="Reminder">  
+          <id name="eventId">
+          <generator class="increment"></generator>  
+          </id>  
+          <property name="username"></property>  
+          <property name="eventType"></property>  
+          <property name="eventDescription"></property>
+          <property name="eventDateTime"></property> 
+          <property name="eventStatus"></property>
+          <property name="eventPriority"></property>
+          
+          </class>
+          
+          <class name="com.psl.bean.MeetingRequest" table="MeetingRequest">  
+          <id name="meetingId">
+          <generator class="increment"></generator>  
+          </id>  
+          <property name="senderUsername"></property>  
+          <property name="recieverUsername"></property>  
+          <property name="dateTime"></property>
+          <property name="reqStatus"></property> 
+          <property name="chkStatus"></property>
+          <property name="reqSendDate"></property>
+          
+          </class>
+          
+          <class name="com.psl.bean.CheckList" table="CheckList" lazy="false">
+ 				<id name="checkListId" column="checkListId">
+ 					<generator class="increment"></generator>
+ 				</id>
+ 				<property name="username" column="username"/>
+ 				<list name="itemlist" cascade="all" fetch = "select" lazy="false">  
+          			<key column="checkListId"></key>  
+          			<index column="type"></index>  
+          			<one-to-many class="com.psl.bean.CheckItem"/>  
+          		</list>  
+ 				<property name="checkListDate" column="checkListDate"/>
+ 		  </class>
+ 
+ 		  <class name="com.psl.bean.CheckItem" table="CheckItem" lazy="false">
+				<id name="checkItemId" column="checkItemId">
+ 					<generator class="increment"></generator>
+ 				</id>
+ 				<property name="description" column="description"/>
+ 				<property name="itemStatus" column="itemStatus"/>
+ 		  </class>
+            
+          </hibernate-mapping>  
